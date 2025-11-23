@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RappiBet – Perfil</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+
+<body>
+  <header class="top-bar">
+    <div class="logoo">
+      <img src="../fotos/logo.png" alt="RappiBet" class="logo" />
+    </div>
+
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="ruleta.html">Ruleta</a></li>
+        <li><a href="transacciones.html">Transacciones</a></li>
+        <li><a href="desarrolladores.html">Sobre Nosotros</a></li>
+        <li><a href="historia.html">Reglas y Condiciones</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="profile-wrap">
+    <section class="profile-card">
+
+      <!---------------- PERFIL ---------------->
+      <div class="profile-grid">
+        <div class="profile-photo">
+          <img src="../fotos/user.jpg" alt="Usuario" />
+        </div>
+
+        <div class="profile-data">
+          <h1 class="username">NombreDeUsuario123</h1>
+          <p class="fullname">Juan Carlos Pérez Soto</p>
+          <p><strong>Correo electrónico:</strong> usuario@gmail.com</p>
+          <p><strong>Fecha de nacimiento:</strong> 01/01/2001</p>
+        </div>
+      </div>
+
+      <div class="profile-cta">
+        <a class="btn-ruleta" href="ruleta.html">Tirar la ruleta</a>
+      </div>
+
+      <!---------------- SALDO + HISTORIAL REAL ---------------->
+      <div class="balance-and-history">
+
+        <h2 id="saldoPerfil" class="txt-saldo">Saldo actual: $0 CLP</h2>
+
+        <table class="tx-table" aria-label="Últimas 5 transacciones">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Tipo</th>
+              <th class="text-right">Monto</th>
+            </tr>
+          </thead>
+
+          <tbody id="ultimosMovimientos">
+            <!-- Se llena automáticamente con JS -->
+          </tbody>
+        </table>
+
+        <div class="tx-more">
+          <a class="btn-deposito" href="transacciones.html">Ver todas las transacciones</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // --- OBTENER SALDO ---
+    let saldo = Number(localStorage.getItem("saldo"));
+    if (isNaN(saldo)) {
+      saldo = 0;
+      localStorage.setItem("saldo", saldo);
+    }
+    document.getElementById("saldoPerfil").textContent =
+      "Saldo actual: $" + saldo.toLocaleString("es-CL") + " CLP";
+
+    // --- OBTENER HISTORIAL (10, 20, 100 movimientos etc) ---
+    function obtenerHistorial() {
+      const h = localStorage.getItem("historial");
+      return h ? JSON.parse(h) : [];
+    }
+
+    // --- MOSTRAR LAS ULTIMAS 5 ---
+    function mostrarUltimos5() {
+      const lista = obtenerHistorial();
+      const ultimos5 = lista.slice(-5).reverse();
+      const tabla = document.getElementById("ultimosMovimientos");
+
+      tabla.innerHTML = "";
+
+      if (ultimos5.length === 0) {
+        tabla.innerHTML = `
+          <tr>
+            <td colspan="3" style="text-align:center; padding:12px;">
+              No hay transacciones registradas.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      ultimos5.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.classList.add(item.tipo === "Ingreso" ? "ingreso" : "retiro");
+
+        tr.innerHTML = `
+          <td class="text-left">${item.fecha}</td>
+          <td class="text-center">${item.tipo}</td>
+          <td class="text-right amount">
+            ${item.tipo === "Ingreso" ? "+ $" : "- $"}
+            ${item.monto.toLocaleString("es-CL")}
+          </td>
+        `;
+        tabla.appendChild(tr);
+      });
+    }
+
+    mostrarUltimos5();
+  </script>
+
+</body>
+</html>

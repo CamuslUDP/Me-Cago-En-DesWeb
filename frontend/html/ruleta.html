@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RappiBet – Ruleta</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+
+<body>
+  <header class="top-bar">
+    <div class="logoo">
+      <img src="../fotos/logo.png" alt="RappiBet" class="logo" />
+    </div>
+
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="ruleta.html">Ruleta</a></li>
+        <li><a href="transacciones.html">Transacciones</a></li>
+        <li><a href="desarrolladores.html">Sobre Nosotros</a></li>
+        <li><a href="historia.html">Reglas y Condiciones</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="arena-wrap">
+
+    <!-- BLOQUE COMPLETO A 1300px DESPLAZADO A 35% -->
+    <section id="bloque-ruleta">
+
+      <!-- RULETA CENTRADA -->
+      <div id="ruleta-centro">
+        <div class="wheel-slot">
+          <div class="wheel-wrap-img">
+            <img class="wheel-rim" src="../fotos/contorno.png" alt="contorno">
+            <img class="wheel-inner" src="../fotos/ruleta.png" alt="ruleta">
+            <div class="pointer"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Viñeta y Botones -->
+      <div class="barra-superior-apuestas">
+        <button id="limpiarApuestas" class="btn-limpiar">Limpiar apuestas</button>
+
+        <div id="saldoApuestasBox" class="saldo-box">
+          <span id="saldoApuestasTexto">$85.200</span>
+        </div>
+
+        <button id="spinBtn" class="btn-spin">Girar ruleta</button>
+      </div>
+
+
+
+    <!-- BARRA DE FICHAS  -->
+    <div id="fichas-bar">
+  <div class="chip" data-valor="100">
+    <img src="../fotos/fichas/100.png" draggable="false">
+    <span class="chip-value">$100</span>
+  </div>
+
+  <div class="chip" data-valor="500">
+    <img src="../fotos/fichas/500.png" draggable="false">
+    <span class="chip-value">$500</span>
+  </div>
+
+  <div class="chip" data-valor="1000">
+    <img src="../fotos/fichas/1K.png" draggable="false">
+    <span class="chip-value">$1K</span>
+  </div>
+
+  <div class="chip" data-valor="5000">
+    <img src="../fotos/fichas/5K.png" draggable="false">
+    <span class="chip-value">$5K</span>
+  </div>
+
+  <div class="chip" data-valor="10000">
+    <img src="../fotos/fichas/10K.png" draggable="false">
+    <span class="chip-value">$10K</span>
+  </div>
+
+  <div class="chip" data-valor="50000">
+    <img src="../fotos/fichas/50K.png" draggable="false">
+    <span class="chip-value">$50K</span>
+  </div>
+
+  <div class="chip" data-valor="100000">
+    <img src="../fotos/fichas/100K.png" draggable="false">
+    <span class="chip-value">$100K</span>
+  </div>
+
+  <div class="chip" data-valor="500000">
+    <img src="../fotos/fichas/500K.png" draggable="false">
+    <span class="chip-value">$500K</span>
+  </div>
+
+  <div class="chip" data-valor="1000000">
+    <img src="../fotos/fichas/1M.png" draggable="false">
+    <span class="chip-value">$1M</span>
+  </div>
+
+</div>
+
+
+      <!-- TABLERO (MISMO QUE EL TUYO, SOLO REUBICADO) -->
+      <div id="board-wrap">
+        <div class="board">
+          <button class="cell zero">0</button>
+          <div class="nums">
+
+            <!-- Fila superior -->
+            <button class="cell num red">3</button>
+            <button class="cell num black">6</button>
+            <button class="cell num red">9</button>
+            <button class="cell num red">12</button>
+            <button class="cell num black">15</button>
+            <button class="cell num red">18</button>
+            <button class="cell num red">21</button>
+            <button class="cell num black">24</button>
+            <button class="cell num red">27</button>
+            <button class="cell num red">30</button>
+            <button class="cell num black">33</button>
+            <button class="cell num red">36</button>
+
+            <!-- Fila media -->
+            <button class="cell num black">2</button>
+            <button class="cell num red">5</button>
+            <button class="cell num black">8</button>
+            <button class="cell num black">11</button>
+            <button class="cell num red">14</button>
+            <button class="cell num black">17</button>
+            <button class="cell num black">20</button>
+            <button class="cell num red">23</button>
+            <button class="cell num black">26</button>
+            <button class="cell num black">29</button>
+            <button class="cell num red">32</button>
+            <button class="cell num black">35</button>
+
+            <!-- Fila inferior -->
+            <button class="cell num red">1</button>
+            <button class="cell num black">4</button>
+            <button class="cell num red">7</button>
+            <button class="cell num black">10</button>
+            <button class="cell num black">13</button>
+            <button class="cell num red">16</button>
+            <button class="cell num red">19</button>
+            <button class="cell num black">22</button>
+            <button class="cell num red">25</button>
+            <button class="cell num black">28</button>
+            <button class="cell num black">31</button>
+            <button class="cell num red">34</button>
+          </div>
+
+          <!-- 2 TO 1 -->
+          <button class="cell to1" style="grid-column:14;grid-row:1;">2 to 1</button>
+          <button class="cell to1" style="grid-column:14;grid-row:2;">2 to 1</button>
+          <button class="cell to1" style="grid-column:14;grid-row:3;">2 to 1</button>
+
+          <!-- DOCENAS -->
+          <button class="cell dozen" style="grid-column:2/6;grid-row:4;">1st 12</button>
+          <button class="cell dozen" style="grid-column:6/10;grid-row:4;">2nd 12</button>
+          <button class="cell dozen" style="grid-column:10/14;grid-row:4;">3rd 12</button>
+
+          <!-- EXTERIORES -->
+          <button class="cell outside" style="grid-column:2/4; grid-row:5;">1–18</button>
+          <button class="cell outside" style="grid-column:4/6; grid-row:5;">EVEN</button>
+          <button class="cell outside red-chip" style="grid-column:6/8; grid-row:5;">RED</button>
+          <button class="cell outside black-chip" style="grid-column:8/10;grid-row:5;">BLACK</button>
+          <button class="cell outside" style="grid-column:10/12;grid-row:5;">ODD</button>
+          <button class="cell outside" style="grid-column:12/14;grid-row:5;">19–36</button>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- COLUMNA DERECHA: HISTORIAL (NO TOCADA) -->
+    <section class="panel panel-history panel-history--grow">
+      <h3>Últimas apuestas</h3>
+      <ul class="bet-history bet-history-lg">
+        <li><span class="h-label">Rojo</span><span class="h-stake">$ 10.000 CLP</span><span class="h-win">Ganador: <span class="win-badge red">32</span></span><span class="h-delta gain">+ $ 10.000</span></li>
+        <li><span class="h-label">Par</span><span class="h-stake">$ 20.000 CLP</span><span class="h-win">Ganador: <span class="win-badge black">15</span></span><span class="h-delta gain">+ $ 20.000</span></li>
+        <li><span class="h-label">Números {7, 23}</span><span class="h-stake">$ 10.000 CLP</span><span class="h-win">Ganador: <span class="win-badge red">19</span></span><span class="h-delta loss">− $ 10.000</span></li>
+        <li><span class="h-label">3rd 12</span><span class="h-stake">$ 5.000 CLP</span><span class="h-win">Ganador: <span class="win-badge green">0</span></span><span class="h-delta loss">− $ 5.000</span></li>
+        <li><span class="h-label">Negro</span><span class="h-stake">$ 15.000 CLP</span><span class="h-win">Ganador: <span class="win-badge black">26</span></span><span class="h-delta loss">− $ 15.000</span></li>
+      </ul>
+    </section>
+
+  </main>
+<script src="../js/ruleta.js"></script>
+
+</body>
+</html>

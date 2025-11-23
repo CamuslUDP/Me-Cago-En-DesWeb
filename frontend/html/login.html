@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RappiBet – Login</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <header class="top-bar">
+    <div class="logoo">
+      <img src="../fotos/logo.png" alt="RappiBet" class="logo" />
+    </div>
+    <nav aria-label="Navegación principal">
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="perfil.html">Perfil</a></li>
+        <li><a href="ruleta.html">Ruleta</a></li>
+        <li><a href="transacciones.html">Transacciones</a></li>
+        <li><a href="desarrolladores.html">Sobre Nosotros</a></li>
+        <li><a href="historia.html">Reglas y Condiciones</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="auth">
+    <section class="login-card">
+      <img src="../fotos/logo.png" alt="RappiBet" class="login-logo">
+      <p class="login-sub">ACCOUNT</p>
+
+      <h1 class="login-title">INICIAR SESIÓN</h1>
+
+      <form class="login-form" action="#" method="post" autocomplete="on">
+        <label class="field-label" for="email">
+          Correo Electrónico <span class="req">*</span>
+        </label>
+      <div class="input-pill">
+        <input type="email" id="email" name="email" placeholder="Correo Electrónico" required>
+      </div>
+
+      <label class="field-label" for="password">
+        Contraseña <span class="req">*</span>
+      </label>
+      <div class="input-pill">
+        <input type="password" id="password" name="password" placeholder="Contraseña" required>
+      </div>
+
+      <button type="button" class="btn btn-dark" onclick="location.href='perfil.html'">
+        INICIAR SESIÓN
+      </button>
+
+      <div class="login-alt">
+        <p>¿No tienes una cuenta RappiBet?</p>
+        <a href="registro.html" class="login-link">Crear una cuenta</a>
+      </div>
+    </form>
+    </section>
+  </main>
+</body>
+</html>
