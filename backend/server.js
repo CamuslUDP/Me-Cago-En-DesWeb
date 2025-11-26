@@ -9,17 +9,14 @@ app.use(express.json());
 // == API ===============================
 app.use('/api', apiRoutes);
 
-// == Archivos ==========================
-app.use(express.static(path.join(__dirname, '../frontend/html')));
-app.use(express.static(path.join(__dirname, '../frontend/css')));
-app.use(express.static(path.join(__dirname, '../frontend/js')));
-app.use(express.static(path.join(__dirname, '../frontend/fotos')));
+// == Archivos Estáticos ==========================
+app.use(express.static(path.join(__dirname, '../frontend')));
 
-
-// == Fallback ==========================
-app.get((req, res) => {
+// == Fallback =====================================
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/html/main.html'));
 });
+
 
 /*
 app.use((req, res) => {
@@ -31,3 +28,5 @@ app.listen(3042, () => {
     console.log(`Servidor Express escuchando en puerto 3042`);
     console.log(`Dominio configurado: ${config.DOMAIN}`);
 });
+
+
