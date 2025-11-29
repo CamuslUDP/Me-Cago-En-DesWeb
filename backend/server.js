@@ -23,14 +23,7 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' });
 });
 */
-// == Servidor ==========================
-app.listen(3042, () => {
-    console.log(`Servidor Express escuchando en puerto 3042`);
-    console.log(`Dominio configurado: ${config.DOMAIN}`);
-});
 
-
-// Añadir esto al final del archivo
 const { connectDB } = require('./utils/db');
 
 async function startServer() {
