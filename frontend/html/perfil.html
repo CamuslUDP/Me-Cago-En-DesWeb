@@ -72,60 +72,57 @@
       </div>
     </section>
   </main>
+  <script src="../js/commons.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", async () => {
+        try {
+            // 1. Obtener Perfil
+            const res = await fetch("/api/user/profile");
+            if (res.ok) {
+                const user = await res.json();
+                
+                // Llenar datos
+                document.querySelector(".username").textContent = user.username;
+                document.querySelector(".fullname").textContent = user.fullName;
+                // Busca los párrafos por contenido (o agrega IDs mejor)
+                const ps = document.querySelectorAll(".profile-data p");
+                ps[1].innerHTML = `<strong>Correo electrónico:</strong> ${user.email}`;
+                ps[2].innerHTML = `<strong>Fecha de nacimiento:</strong> ${user.birthDate.split("T")[0]}`;
+                
+                document.getElementById("saldo-perfil").textContent = "Saldo actual: $" + user.balance.toLocaleString("es-CL") + " CLP";
+            }
 
-  <script>
-    // --- OBTENER SALDO ---
-    let saldo = Number(localStorage.getItem("saldo"));
-    if (isNaN(saldo)) {
-      saldo = 0;
-      localStorage.setItem("saldo", saldo);
-    }
-    document.getElementById("saldoPerfil").textContent =
-      "Saldo actual: $" + saldo.toLocaleString("es-CL") + " CLP";
+            // 2. Obtener Historial (Juegos y Transacciones mezclados o solo transacciones, según prefieras)
+            // Aquí pediremos las transacciones
+            const resHist = await fetch("/api/user/transactions");
+            if(resHist.ok) {
+                const list = await resHist.json();
+                const tabla = document.getElementById("ultimos-movimientos");
+                tabla.innerHTML = "";
+                
+                list.slice(0, 5).forEach(item => {
+                    const tr = document.createElement("tr");
+                    const dateStr = new Date(item.date).toLocaleDateString("es-CL");
+                    const isIngreso = item.action === "DEPOSIT";
+                    const tipo = isIngreso ? "Ingreso" : "Retiro";
+                    
+                    tr.classList.add(isIngreso ? "ingreso" : "retiro");
+                    tr.innerHTML = `
+                        <td class="text-left">${dateStr}</td>
+                        <td class="text-center">${tipo}</td>
+                        <td class="text-right amount">
+                            ${isIngreso ? "+ $" : "- $"} ${Math.abs(item.amount).toLocaleString("es-CL")}
+                        </td>
+                    `;
+                    tabla.appendChild(tr);
+                });
+            }
 
-    // --- OBTENER HISTORIAL (10, 20, 100 movimientos etc) ---
-    function obtenerHistorial() {
-      const h = localStorage.getItem("historial");
-      return h ? JSON.parse(h) : [];
-    }
-
-    // --- MOSTRAR LAS ULTIMAS 5 ---
-    function mostrarUltimos5() {
-      const lista = obtenerHistorial();
-      const ultimos5 = lista.slice(-5).reverse();
-      const tabla = document.getElementById("ultimosMovimientos");
-
-      tabla.innerHTML = "";
-
-      if (ultimos5.length === 0) {
-        tabla.innerHTML = `
-          <tr>
-            <td colspan="3" style="text-align:center; padding:12px;">
-              No hay transacciones registradas.
-            </td>
-          </tr>
-        `;
-        return;
-      }
-
-      ultimos5.forEach(item => {
-        const tr = document.createElement("tr");
-        tr.classList.add(item.tipo === "Ingreso" ? "ingreso" : "retiro");
-
-        tr.innerHTML = `
-          <td class="text-left">${item.fecha}</td>
-          <td class="text-center">${item.tipo}</td>
-          <td class="text-right amount">
-            ${item.tipo === "Ingreso" ? "+ $" : "- $"}
-            ${item.monto.toLocaleString("es-CL")}
-          </td>
-        `;
-        tabla.appendChild(tr);
-      });
-    }
-
-    mostrarUltimos5();
-  </script>
+        } catch(e) {
+            console.error("Error cargando perfil", e);
+        }
+    });
+</script>
 
 </body>
 </html>
