@@ -74,7 +74,7 @@ router.post("/withdraw", async (req, res) => {
   await historial.insertOne({
     userId,
     action: "WITHDRAW",
-    amount: -amount, // Negativo para indicar salida
+    amount: -amount,
     date: new Date()
 });
 
@@ -83,7 +83,6 @@ router.post("/withdraw", async (req, res) => {
 
 // GET /api/user/transactions
 router.get("/transactions", async (req, res) => {
-    // Busca depósitos y retiros
     const list = await historial
         .find({ 
             userId: new mongoose.Types.ObjectId(req.user.id),

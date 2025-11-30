@@ -29,7 +29,7 @@ app.get('/ruleta', (req, res) => res.sendFile(path.join(__dirname, '../frontend/
 app.get('/transacciones', (req, res) => res.sendFile(path.join(__dirname, '../frontend/html/transacciones.html')));
 
 // == Fallback SPA (Opcional, redirige a index si no encuentra nada) ==
-app.use('*', (req, res) => {
+app.use((req, res) => {
     if (req.originalUrl.startsWith('/api')) {
         return res.status(404).json({ error: "API endpoint not found" });
     }
